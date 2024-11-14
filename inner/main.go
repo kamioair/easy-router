@@ -1,17 +1,18 @@
 package main
 
 import (
-	"easy-router/inner/blls"
 	"github.com/google/uuid"
 	"github.com/kamioair/quick-utils/qservice"
 )
 
 func main() {
 	// 创建微服务
-	code := blls.GetDeviceCode()
+	code, _ := qservice.DeviceCode.LoadFromFile()
 	if code == "" {
 		uid, _ := uuid.NewUUID()
 		code = uid.String()
+	} else {
+		deviceCode = code
 	}
 	setting := qservice.NewSetting(DefModule, DefDesc, Version).
 		BindInitFunc(onInit).
