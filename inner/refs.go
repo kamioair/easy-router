@@ -4,8 +4,8 @@ type refStruct struct{}
 
 var refs refStruct
 
-func (ref *refStruct) getDeviceCode() (string, error) {
-	ctx, err := service.SendRequest("ClientManager", "GetDeviceCode", nil)
+func (ref *refStruct) newDeviceCode() (string, error) {
+	ctx, err := service.SendRequest("ClientManager", "NewDeviceCode", nil)
 	if err != nil {
 		return "", err
 	}

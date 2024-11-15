@@ -6,7 +6,7 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
-	"github.com/kamioair/quick-utils/qdefine"
+	"github.com/kamioair/qf/qdefine"
 	easyCon "github.com/qiu-tec/easy-con.golang"
 	"strings"
 	"time"

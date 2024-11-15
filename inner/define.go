@@ -5,9 +5,10 @@ import (
 	"easy-router/inner/config"
 	"easy-router/inner/models"
 	"errors"
-	"github.com/kamioair/quick-utils/qconvert"
-	"github.com/kamioair/quick-utils/qdefine"
-	"github.com/kamioair/quick-utils/qservice"
+	"fmt"
+	"github.com/kamioair/qf/qdefine"
+	"github.com/kamioair/qf/qservice"
+	"github.com/kamioair/qf/utils/qconvert"
 )
 
 const (
@@ -25,18 +26,19 @@ var (
 )
 
 // 初始化
-func onInit() {
+func onInit(moduleName string) {
 	// 配置初始化
-	config.Init(service.Module)
+	config.Init(moduleName)
 
 	// 如果没生成客户端唯一码，重新生成并重置客户端
-	// 然后保存到文件
+	deviceCode, _ = blls.DeviceCode.LoadFromFile()
 	if deviceCode == "" {
-		code, err := refs.getDeviceCode()
+		code, err := refs.newDeviceCode()
 		if err != nil {
 			panic(err)
 		}
-		err = qservice.DeviceCode.SaveToFile(code)
+		// 保存到文件
+		err = blls.DeviceCode.SaveToFile(code)
 		if err != nil {
 			panic(err)
 		}
@@ -45,7 +47,10 @@ func onInit() {
 	}
 
 	// 业务初始化
-	routeBll = blls.NewRouteBll(service.Module, deviceCode, service.SendRequest)
+	routeBll = blls.NewRouteBll(moduleName, deviceCode, service.SendRequest)
+
+	// 输出设备码给启动器
+	fmt.Println("[DeviceCode]:", deviceCode)
 }
 
 // 处理外部请求

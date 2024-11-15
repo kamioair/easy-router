@@ -4,7 +4,7 @@ go 1.20
 
 require (
 	github.com/google/uuid v1.4.0
-	github.com/kamioair/quick-utils v0.0.9
+	github.com/kamioair/qf v0.0.1
 )
 
 require (
@@ -44,4 +44,4 @@ require (
 	gorm.io/gorm v1.25.12 // indirect
 )
 
-replace github.com/kamioair/quick-utils => ../quick-utils
+replace github.com/kamioair/qf => ../qf

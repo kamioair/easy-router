@@ -2,8 +2,8 @@ package config
 
 import (
 	_ "embed"
-	"github.com/kamioair/quick-utils/qconfig"
-	"github.com/kamioair/quick-utils/qdefine"
+	"github.com/kamioair/qf/qdefine"
+	"github.com/kamioair/qf/utils/qconfig"
 )
 
 // Config 自定义配置
